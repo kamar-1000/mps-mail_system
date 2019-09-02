@@ -1,0 +1,25 @@
+{%extends 'mail/basic.html'%}
+{%block css%}
+
+{%endblock%}
+{%block body%}
+<div class="container">
+<div class="row">
+{%include "account/profile_basic.html"%}
+	<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12">
+		<h6 class="list-group-item bg-danger text-white font-weight-bolder">Information<span class="float-right" id="pic_upload"><a href="/account/edit_profile" class="text-white">|edit|</a></span></h6>
+	<div class="list-group-item ">
+		<div class="ml-3">
+		<p><b>First Name:</b> -------------------------------------------------------------------------------  {{profile.user.first_name|title}}</p>
+		<p><b>Last Name:</b> -------------------------------------------------------------------------------  {{profile.user.last_name|title}}</p>
+		<p><b>Username:</b> -------------------------------------------------------------------------------  {{profile.user.username}}</p>
+		<p><b>Phone no.:</b> -------------------------------------------------------------------------------  {{profile.tel}}</p>
+		<p><b>Email Address:</b> ---------------------------------------------------------------------------  {{profile.user.email}}</p>
+		<p><b>Sex:</b>  ---------------------------------------------------------------------------------------  {{profile.gender}}</p>
+		<p><b>Account type:</b> ----------------------------------------------------------------------------  {{profile.type}}</p>
+	</div>
+	</div>
+		</div>
+	</div>
+</div>
+{%endblock%}

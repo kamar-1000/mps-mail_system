@@ -1,0 +1,32 @@
+{%extends 'mail/basic.html'%} 
+{%block css%}
+.img-respon{
+	height:6vw;
+	width:6vw;
+}
+.msg{
+	font-size:20px;
+}
+.list-group-item{
+	background-color:white;
+}
+{%endblock%}
+{%block body%}
+<div class="container">
+<section class="my-5">
+	<div class="list-group-item">
+	<hr>
+	<h4>{{sentmail_view.sub}}</h4>
+	<hr><img src="/media/{{sentmail_view.profile.pic}}" class=" img-inbox-sentmail rounded-circle float-left mr-4">
+		<b>{{user.username}}</b>  &lt{{sentmail_view.profile.user.email}}&gt
+		<p> to {{sentmail_view.to_user.user.email}}</p><br>
+		<p>From: {{sentmail_view.profile.user.email}}</p>
+		<p>To: {{sentmail_view.to_user.user.email}}</p>
+		<p>Date: {{sentmail_view.date}}</p>
+		<p class="msg">{{sentmail_view.msg}}</p><br><br><br>
+		<button class="btn btn-outline-secondary btn-lg ml-5 font-weight-bolder px-4">Reply</button>
+		<button class="btn btn-outline-secondary btn-lg ml-3 font-weight-bolder px-4">Forward</button><br><br><br><br>
+	</div>
+</section>
+</div>
+{%endblock%}

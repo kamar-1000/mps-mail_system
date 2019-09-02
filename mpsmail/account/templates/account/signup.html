@@ -1,0 +1,72 @@
+{%extends 'mail/basic.html'%}
+{%block css%}
+#signup-img{
+	width:12vw;
+	height:12vw;
+}
+#input-email{
+	width:300px;
+}
+.input-email-mps{
+	background-color:#fafafa;
+	border:1px solid gray;
+	font-weight:bolder;
+}
+{%endblock%}
+{%block body%}
+<div class="container">
+{%load static%}
+<div class="row">
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+
+
+</div>
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<form action="/account/signup/" method="post" class="">{%csrf_token%}
+<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Signup</h4>
+<div class="list-group-item ">
+<div class="row">
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<div class="form-group">
+<label for="fname"><b>First Name:</b></label>
+<input type="name" name="fname" class="form-control" placeholder="Enter your first name">
+</div>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-12">
+	<div class="form-group">
+<label for="lname"><b>Last Name:</b></label>
+<input type="name" name="lname" class="form-control" placeholder="Enter your last name">
+</div>
+</div>
+</div>
+<div class="form-group">
+<label for="name"><b>Username:</b></label>
+<input type="name" name="name" class="form-control d-inline" id="input-email" placeholder="username@mps.edu"><span class="input-email-mps p-2">@mps.edu</span>
+{%for msg in messages%}
+{%if "erorr" in msg.tags%}
+<p class="alert alert-danger text-danger mt-2">{{msg}}</p>
+{%endif%}
+{%endfor%}
+</div>
+{%for field in form%}
+<div class="form-group">
+<b>{{field.label_tag}}</b>&nbsp&nbsp{{field}}
+</div>
+{%endfor%}
+<div class="form-group">
+<label for="pwd"><b>Password:</b></label>
+<input type="Password" name="pwd" class="form-control" placeholder="Enter your new Password">
+</div>
+<button type="submit" class="btn btn-success font-weight-bolder px-4">Submit</button>
+{%for msg in messages%}
+{%if "success" in msg.tags%}
+<p class="alert alert-success text-success mt-2">{{msg}}</p>
+{%endif%}
+{%endfor%}
+</div>
+</form>
+
+</div>
+</div>
+</div>
+{%endblock%}

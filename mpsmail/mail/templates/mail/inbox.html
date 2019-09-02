@@ -1,0 +1,47 @@
+{%extends 'mail/basic.html'%} 
+{%block css%}
+.img-respon{
+	height:6vw;
+	width:6vw;
+}
+.inbox:hover{
+	box-shadow: 5px 2px gray;
+}
+.list-group-item{
+	background-color:#fafafa
+}
+{%load static%}
+.bg{
+background-image: url("{% static 'mail/img/mps2.png' %}");
+	background-repeat: no-repeat;
+	background-position: center;
+		background-attachment: fixed;
+
+}
+{%endblock%}
+{%block body%}
+<div class="container">
+	<section class="my-5">
+		<div class=" mt-5 mb-3">
+		<form action="/home/search/" method="post" class="form-inline ">
+		<input type="search" value="search here..." class="form-control">
+		<button type="submit" class="btn btn-success my-2 font-weight-bolder">Search</button>
+	</form>
+	</div>
+	<div class="remove-underline list-group-item bg list-group-item-secondary py-5">
+		<h4 class="text-danger">Inbox</h4>
+{% for msg in inbox%}
+<a href="/home/inbox_view/{{msg.id}}" class=" ">
+<li class="list-group-item list-group-item-secondary inbox py-0 my-3">
+	<img src="/media/{{msg.from_user.pic}}" class="img-fluid img-respon rounded-circle">
+	<span class="ml-2 mr-5 font-weight-bolder">{{msg.from_user.user.username|upper}}</span>
+	<span class=""><b>{{msg.sub|slice:":25"}}</b></span> -
+	<span class="ml-2">{{msg.msg|slice:":45"}}........</span>
+	<span class="font-weight-bolder badge badge-warning">{{msg.date}}</span> 
+</li>
+</a>
+{%endfor%}
+</div>
+</section>
+</div>
+{%endblock%}
