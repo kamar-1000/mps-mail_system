@@ -4,10 +4,11 @@ from .models import Sentmail
 class CreatemailForm(forms.ModelForm):
 	class Meta:
 		model=Sentmail
-		fields=['msg','sub']
+		fields=['msg','sub','attach']
 		labels = {
             "sub":"Subject",
-            "msg":"Message"
+            "msg":"Message",
+            "attach":"Attach File"
         }
 		widgets={
 			'sub':forms.TextInput(attrs={'class':"form-control"})

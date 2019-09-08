@@ -13,11 +13,13 @@ class Inbox(models.Model):
 	#to_pic=
 	sub=models.CharField(max_length=200)
 	msg=models.TextField()
+	attach=models.FileField(upload_to="attach_data/",default="")
 	date=models.DateField(auto_now_add=True)
+	starred=models.BooleanField(default=False)
 	def __str__(self):
 		return self.from_user.user.username+" "+self.profile.user.username
 
-class Sentmail(models.Model):	
+class Sentmail(models.Model):
 	profile=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="sentmail_profile")
 	to_user=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="to_user",default='')
 	#to_name=models.CharField(max_length=80)
@@ -28,6 +30,7 @@ class Sentmail(models.Model):
 	#from_pic=
 	sub=models.CharField(max_length=200)
 	msg=models.TextField()
+	attach=models.FileField(upload_to="attach_data/",default="",blank=True)
 	date=models.DateField(auto_now_add=True)
 
 class Notification(models.Model):
@@ -35,7 +38,5 @@ class Notification(models.Model):
 	from_user=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="from_notification")
 	mail_id=models.IntegerField()
 	check=models.BooleanField(default=False)
-
-class Important(models.Model):
-	profile=models.ForeignKey(Profile,on_delete=models.CASCADE)
-	mail_id=models.IntegerField()
+	def __str__(self):
+	    return self.profile.user.username

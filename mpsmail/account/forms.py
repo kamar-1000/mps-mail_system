@@ -1,8 +1,8 @@
 from django import forms
 from .models import Profile
 class LoginForm(forms.Form):
-	email=forms.CharField(widget=forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter your mps email ID"}))
-	password=forms.CharField(widget=forms.PasswordInput(attrs={'class':"form-control",'placeholder':"Enter your password"}))
+	email=forms.CharField(widget=forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter your mps email ID",'autocomplete':"off"}))
+	password=forms.CharField(widget=forms.PasswordInput(attrs={'class':"form-control",'placeholder':"Enter your password",'autocomplete':"off"}))
 	def clean_email(self):
 		email=self.cleaned_data['email']
 		if not email.endswith('@mps.edu'):
@@ -14,8 +14,8 @@ class SignupForm(forms.ModelForm):
 		model=Profile
 		exclude=['user','email','pic']
 		widgets={
-				'tel':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter you phone number"}),
-				'security':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter your security question this helps to reset your password"})
+				'tel':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter you phone number",'autocomplete':"off"}),
+				'security':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter your security question this helps to reset your password",'type':"password",'autocomplete':"off"})
 		}
 		labels = {
         "tel": "Phone no.",

@@ -1,8 +1,11 @@
-{%extends 'mail/basic.html'%} 
+{%extends 'mail/basic.html'%}
 {%block css%}
 .img-respon{
 	height:6vw;
 	width:6vw;
+}
+.inbox-view-attach-file{
+    font-size:50px;
 }
 .msg{
 	font-size:20px;
@@ -12,20 +15,25 @@
 }
 {%endblock%}
 {%block body%}
-<div class="container">
+<div class="container-fluid">
 <section class="my-5">
 	<div class="list-group-item">
 	<hr>
 	<h4>{{sentmail_view.sub}}</h4>
-	<hr><img src="/media/{{sentmail_view.profile.pic}}" class=" img-inbox-sentmail rounded-circle float-left mr-4">
+	<hr>
+	<a href="/media/{{sentmail_view.profile.pic}}"><img src="/media/{{sentmail_view.profile.pic}}" class=" img-inbox-sentmail rounded-circle float-left mr-4"></a>
 		<b>{{user.username}}</b>  &lt{{sentmail_view.profile.user.email}}&gt
 		<p> to {{sentmail_view.to_user.user.email}}</p><br>
 		<p>From: {{sentmail_view.profile.user.email}}</p>
 		<p>To: {{sentmail_view.to_user.user.email}}</p>
 		<p>Date: {{sentmail_view.date}}</p>
+		{%if sentmail_view.attach%}
+		<div class="ml-5"><i class="fa fa-file mr-5 text-secondary inbox-view-attach-file"></i><br><i class="fa fa-file-download inbox-view-attach-file"></i></div>
+		<a href="/media/{{sentmail_view.attach}}" style="font-size:14px;">{{sentmail_view.attach.name|slice:"12:"}}</a><br><br>
+		{%endif%}
 		<p class="msg">{{sentmail_view.msg}}</p><br><br><br>
-		<button class="btn btn-outline-secondary btn-lg ml-5 font-weight-bolder px-4">Reply</button>
-		<button class="btn btn-outline-secondary btn-lg ml-3 font-weight-bolder px-4">Forward</button><br><br><br><br>
+		<button class="btn btn-outline-secondary btn-lg ml-5 font-weight-bolder px-4"><i class="fa fa-reply"></i> Reply</button>
+		<button class="btn btn-outline-secondary btn-lg ml-3 font-weight-bolder px-4"><i class="fa fa-share"></i> Forward</button><br><br><br><br>
 	</div>
 </section>
 </div>

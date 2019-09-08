@@ -7,21 +7,21 @@
 	</div>
 	<div class="col-sm-12 col-md-6 col-lg-6 col-xl col-sm-12">
 	<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Forgot Password..!</h4>
-	<form action="/account/forgot_pwd/" method="post" class=" list-group-item">{%csrf_token%}
+	<form action="/account/forgot_pwd/" method="post" class=" list-group-item" autocomplete="off">{%csrf_token%}
 	<div class="form-group">
-		<label for="email">Email:</label>
-		<input type="email" name="email" class="form-control" placeholder="Enter your email ID" required="true">
+		<label for="email"><b>Email:</b></label>
+		<input type="email" name="email" class="form-control" placeholder="Enter your email ID" required="true" autocomplete="off">
 	</div>
 	<div class="form-group">
-		<label for="security">Security Question:</label>
-		<input type="name" name="security" class="form-control" placeholder="Enter your security Question" required="true">
+		<label for="security"><b>Security Question:</b></label>
+		<input type="name" name="security" class="form-control" placeholder="Enter your security Question" required="true" autocomplete="off">
 	</div>
 	<div class="form-group">
-	<label for="pwd">New Password</label>
+	<label for="pwd"><b>New Password</b></label>
 	<input type="password" name="pwd" class="form-control" placeholder="Set your new password" required="true">
 	</div>
 	<div class="form-group">
-	<label for="cnfpwd">Confirm Password</label>
+	<label for="cnfpwd"><b>Confirm Password</b></label>
 	<input type="password" name="cnfpwd" class="form-control" placeholder="Confirm your new password" required="true">
 	</div>
 	{%for msg in messages%}
@@ -30,7 +30,7 @@
 	{%else%}
 	<p class="alert alert-danger text-danger">{{msg}}</p>
 	{%endif%}
-	{%endfor%}	
+	{%endfor%}
 	<button type="submit" class="btn btn-success">Submit</button>
 </form>
 </div>
