@@ -1,7 +1,6 @@
 {%extends 'mail/basic.html'%}
-{%block css%}
+{%block title%}{{user.username|title}} | edit profile{%endblock%}
 
-{%endblock%}
 {%block body%}
 <div class="container">
 <div class="row">
@@ -46,7 +45,7 @@
 {%for msg in messages%}
 <p class="alert alert-danger text-danger">{{msg}}</p>
 {%endfor%}
-<button type="submit" class="btn btn-success">Submit</button>
+<button type="submit" class="btn btn-success">Update</button>
 </form>
 	</div>
 		</div>

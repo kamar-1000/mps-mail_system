@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.http import JsonResponse
 from mail.models import Profile,Notification,Inbox
 from django.contrib.auth.models import User,auth
-#from django.views.generic import 
+#from django.views.generic import
 # Create your views here.
 
 @login_required(login_url="/account/login")
@@ -29,6 +29,10 @@ def forgot_pwd(req):
 				profile.user.save()
 				print("pwd change")
 				messages.success(req,mark_safe("password successfully Reset <a href='/account/login'>click here to login</a>"))
+				from_user=Profile.objects.get(user__username="support")
+				profile=Profile.objects.get(user__username=req.user)
+				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Password has been changed",msg="Hello <{}> Your Password Successfully Changed. For any help mail us on support@mps.edu".format(req.user))
+				Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 			else:messages.error(req,"Confirm password not match...!")
 		except Exception as e:
 			print(e)
@@ -70,10 +74,14 @@ def change_password_with_security(req):
 			if security_verify=="True":
 				pwd=req.POST.get('pwd',"")
 				cnfpwd=req.POST.get('cnfpwd',1)
-				if pwd==cnfpwd: 
+				if pwd==cnfpwd:
 					profile.user.set_password(pwd)
 					profile.user.save()
 					messages.success(req,mark_safe("Your password has been successfully changed <a href='/account/login'>click here to login</a>"))
+					from_user=Profile.objects.get(user__username="support")
+					profile=Profile.objects.get(user__username=req.user)
+					inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Password has been changed",msg="Hello <{}> Your Password Successfully Changed. For any help mail us on support@mps.edu".format(req.user))
+					Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 				else:
 					messages.error(req,"confirm password not match...!")
 			else:messages.error(req,"Invalid Security Question..2.!")
@@ -91,6 +99,10 @@ def change_password_with_old(req):
 				profile.user.set_password(pwd)
 				profile.user.save()
 				messages.success(req,mark_safe("Your password has been successfully changed <a href='/account/login'>click here to login</a>"))
+				from_user=Profile.objects.get(user__username="support")
+				profile=Profile.objects.get(user__username=req.user)
+				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Password has been changed",msg="Hello <{}> Your Password Successfully Changed. For any help mail us on support@mps.edu".format(req.user))
+				Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 			else:
 				messages.error(req,"confirm password not match...!")
 		else:
@@ -124,11 +136,16 @@ def edit_profile(req):
 		try:
 			user=User.objects.filter(id=id).update(first_name=fname,last_name=lname)
 			count=Profile.objects.filter(user__id=id).update(tel=tel,type=type,gender=gender)
+			messages.success(req,"your profile has been updated")
+			from_user=Profile.objects.get(user__username="support")
+			profile=Profile.objects.get(user__username=req.user)
+			inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Profile has been Updated",msg="Hello <{}> Your Account has been Updated, For any help mail us on support@mps.edu".format(req.user))
+			Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 			return redirect("/account/profile")
 		except:
 			messages.error(req,"error in updating data")
 	return render(req,"account/edit_profile.html",{"profile":profile})
-	
+
 def signup(req):
 	if req.user.is_authenticated:
 		return redirect("/")
@@ -148,8 +165,10 @@ def signup(req):
 				f.save()
 				profile=user.profile
 				print(profile)
-				from_user=Profile.objects.get(user__username="mps")
+				from_user=Profile.objects.get(user__username="support")
 				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Account successfully created",msg="Hello <{}> Your Account successfully created welcome to @mps.edu".format(user.username))
+				Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
+				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Account successfully Activated",msg="Hello <{}> Your Account is Activated, Now You Can Able to Send, Receive Email,   For any help mail us on support@mps.edu".format(user.username))
 				Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 				messages.success(req,mark_safe("Account successfully created <a href='/account/login'>click here to login</a>"))
 		except:messages.error(req,"Username already exist choice another username")

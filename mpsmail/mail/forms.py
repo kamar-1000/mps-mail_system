@@ -11,7 +11,8 @@ class CreatemailForm(forms.ModelForm):
             "attach":"Attach File"
         }
 		widgets={
-			'sub':forms.TextInput(attrs={'class':"form-control"})
+			'sub':forms.TextInput(attrs={'class':"form-control"}),
 			#'msg':forms.Textarea(attrs={'cols':"50"})
-}
+			'attach':forms.FileInput(attrs={'class':"form-control-file"})
+			}
 

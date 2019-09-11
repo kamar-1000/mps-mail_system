@@ -85,16 +85,18 @@ font-size:14px;
 	<a href="/home" class="navbar-brand text-white font-weight-bolder">@mps.edu</a>
 	<button class="navbar-toggler" data-toggle="collapse" data-target="#mynav"><span class="navbar-toggler-icon"></span></button>
 	<div id="mynav" class="collapse navbar-collapse">
+	    	{%if user.is_authenticated%}
 <ul class="navbar-nav navbar-link-style font-weight-bolder text-center">
 	<li class="nav-item"><a href="/home" class="nav-link p-3">Home <i class="fa fa-home font-awesome-notification"></i></a></li>
 		<li class="nav-item p-0"><a href="/home/inbox" class="nav-link p-3">Inbox <i class="fa fa-inbox font-awesome-notification"></i></a></li>
 	<li class="nav-item"><a href="/home/create" class="nav-link p-3">Create Mail <i class="fa fa-edit font-awesome-notification"></i></a></li>
 	<li class="nav-item"><a href="/home/sentmail" class="nav-link p-3">Sent Mail <i class="fa fa-angle-double-up font-awesome-notification"></i></a></li>
 	<li class="nav-item"><a href="/home/starred" class="nav-link p-3">Starred <i class="fa fa-star font-awesome-notification"></i></a></li>
-	{%if user.is_authenticated%}
+
 		<li class="nav-item "><a href="#" class="nav-link p-3" data-toggle="popover" id="noti" data-placement="bottom" data-trigger="focus" data-html="true">Notification <i class="fa fa-bell font-awesome-notification"></i><b><sup id="forhide"><h5 id="count-mail" class="d-inline bg-white text-danger font-weight-bolder px-1">0</h5></sup></b></a></li>
-	{%endif%}
+
 	</ul>
+		{%endif%}
 	<ul class="navbar-nav navbar-link-style text-center ml-auto font-weight-bolder">
 	{%if user.is_authenticated%}
 	<li class="nav-item"><a href="/account/profile" class="nav-link text-white"><img src="/media/{{user.profile.pic}}" class="img-fluid img-login rounded-circle">  <b>{{user.username|upper}}</b></a></li>
@@ -105,7 +107,9 @@ font-size:14px;
 	{%endif%}
 </ul>
 </div>
-</nav><br><br>
+</nav>
+{%block parallex-img%} {%endblock%}
+<br><br>
 <main class="my-5">
 {%block body%} {%endblock%}
 </main><br><br><br><br><br>

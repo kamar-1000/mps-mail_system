@@ -11,9 +11,9 @@ urlpatterns = [
     path('notification',views.notification),
     path('delete_inbox/<int:id>',views.delete_inbox),
     path('delete_sent_mail/<int:id>',views.delete_sent_mail),
-    path('save_starred/<int:id>',views.save_starred),
+    path('save_starred/',views.save_starred),
     path('starred/',views.starred),
-    path('delete_starred/<int:id>',views.delete_starred),
-
+    path('delete_starred/',views.delete_starred),
+    path('about/',views.about)
 
 ]

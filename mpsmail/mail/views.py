@@ -1,47 +1,52 @@
 from django.shortcuts import render,redirect
-from .models import Sentmail
 from account.models import Profile
 from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Inbox,Notification,Sentmail
 from .forms import CreatemailForm
-from django.shortcuts import render
 import json
 from django.contrib import messages
 from django.core import serializers
 # Create your views here.
 def home(req):
-	return render(req,"mail/home.html")
-
+    if req.user.is_authenticated:
+        return render(req,"mail/index.html")
+    return render(req,"mail/home.html")
+def about(req):
+    return render(req,"mail/about.html")
 @login_required(login_url="/account/login")
 def inbox(req):
 	inbox=Inbox.objects.filter(profile__user__username=req.user).order_by('-id')
 	return render(req,"mail/inbox.html",{'inbox':inbox})
 
 def delete_inbox(req,id):
-    Inbox.objects.get(id=id).delete()
-    messages.error(req,"Item Successfully deleted from Inbox")
-    return redirect("/home/inbox")
-
-def delete_starred(req,id):
-    Inbox.objects.filter(id=id).update(starred=False)
+    try:
+        Inbox.objects.get(profile__user__username=req.user,id=id).delete()
+        messages.error(req,"Item Successfully deleted from Inbox")
+        return redirect("/home/inbox")
+    except:return render(req,"mail/error.html")
+def delete_starred(req):
+    id=req.GET.get("id",None)
+    Inbox.objects.filter(profile__user__username=req.user,id=id).update(starred=False)
     messages.error(req,"Successfully remove from starred")
-    return redirect("/home/inbox")
+    return HttpResponse("true")
 
-def save_starred(req,id):
+def save_starred(req):
+    id=req.GET.get("id",None)
     Inbox.objects.filter(id=id).update(starred=True)
     messages.success(req,"Successfully added in starred")
-    return redirect("/home/inbox")
+    return HttpResponse("true")
 
 def starred(req):
     starred=Inbox.objects.filter(profile__user__username=req.user,starred=True).order_by("-id")
     return render(req,"mail/starred.html",{"starred":starred})
 
 def delete_sent_mail(req,id):
-    Sentmail.objects.filter(id=id).delete()
-    messages.success(req,"Item Successfully deleted..!")
-    return redirect("/home/sentmail")
-
+    try:
+        Sentmail.objects.get(profile__user__username=req.user,id=id).delete()
+        messages.success(req,"Item Successfully deleted..!")
+        return redirect("/home/sentmail")
+    except:return render(req,"mail/error.html")
 def notification(req):
 	if not req.user.is_authenticated:
 		return HttpResponse("not_authenticated")
@@ -73,9 +78,10 @@ def notification(req):
 
 @login_required(login_url="/account/login")
 def inbox_view(req,id):
-	inbox_view=Inbox.objects.get(id=id)
-	return render(req,"mail/inbox_view.html",{"inbox_view":inbox_view})
-
+    try:
+    	inbox_view=Inbox.objects.get(profile__user__username=req.user,id=id)
+    	return render(req,"mail/inbox_view.html",{"inbox_view":inbox_view})
+    except:return render(req,"mail/error.html")
 @login_required(login_url="/account/login")
 def sentmail(req):
 	sentmail=Sentmail.objects.filter(profile__user__username=req.user).order_by('-id')
@@ -83,9 +89,10 @@ def sentmail(req):
 
 @login_required(login_url="/account/login")
 def sentmail_view(req,id):
-	sentmail_view=Sentmail.objects.get(id=id)
-	return render(req,"mail/sentmail_view.html",{"sentmail_view":sentmail_view})
-
+    try:
+    	sentmail_view=Sentmail.objects.get(profile__user__username=req.user,id=id)
+    	return render(req,"mail/sentmail_view.html",{"sentmail_view":sentmail_view})
+    except:return render(req,"mail/error.html")
 @login_required(login_url="/account/login")
 def create(req):
 	form=CreatemailForm()

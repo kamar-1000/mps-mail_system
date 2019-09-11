@@ -1,5 +1,40 @@
 {%extends "mail/basic.html"%}
-{%block body%}
+{%load static%}
+{%block css%}
+.div1{
+    background-image:url("{%static 'mail/img/1.jpg'%}");
 
-<h1 class="">Welcome home page</h1>
+}
+.div2{
+ background-image:url("{%static 'mail/img/3.jpg'%}");
+}
+.div3{
+ background-image:url("{%static 'mail/img/4.jpg'%}");
+}
+.div4{
+ background-image:url("{%static 'mail/img/last.png'%}");
+}
+.parallax{
+    background-attachment:fixed;
+    background-position: center;
+    }
+.home-img-size{
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 600px;
+}
+{%endblock%}
+{%block parallex-img%}
+<div class="div1 parallax home-img-size">   </div><br><br>
+<div class="div2 home-img-size ">   </div>
+<h1 class="">Welcome home  Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home</h1>
+<h1 class="">Welcome home  Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home</h1>
+<div class="div3 home-img-size parallax">   </div>
+<div class="div4 home-img-size">   </div>
+<h1 class="">Welcome home</h1>
+<h1 class="">Welcome home</h1>
+<h1 class="">Welcome home  Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home
+  Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home
+    Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home
+      Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home   Welcome homeWelcome home </h1>
 {%endblock%}
