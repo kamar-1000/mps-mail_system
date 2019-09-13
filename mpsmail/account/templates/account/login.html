@@ -1,21 +1,28 @@
 {%extends 'mail/basic.html'%}
+{%load static%}
 {%block title%}Log in to @mps.edu | @mps.edu {%endblock%}
+{%block css%}
+.back-im{
+    background-image:url({%static 'mail/img/1.jpg'%});
+    background-size:cover;
+}
+{%endblock%}
 {%block body%}
 <div class="container-fluid">
 <div class="col-lg-5 mx-auto">
 	<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Login</h4>
-	<form action="/account/login/" method="post" class=" list-group-item" autocomplete="off">{%csrf_token%}
+	<form action="/account/login/" method="post" class=" list-group-item back-im " autocomplete="off">{%csrf_token%}
 	  {%for field in form%}
 	<div class="form-group">
-	<b>{{field.label_tag}}</b>{{field}}{{field.errors}}
+	{{field.label_tag}}{{field}}{{field.errors}}
     </div>
 	{%endfor%}
 	{%for msg in messages%}
 	<p class="alert alert-danger text-danger">{{msg}}</p>
 	{%endfor%}
-	<a href="/account/forgot_pwd">Forgot password...!</a><br>
-	<a href="/account/signup">No account? Sign up here!</a><br>
-	<button type="submit" class="btn btn-success font-weight-bolder btn-block my-2">Submit</button>
+	<a href="/account/forgot_pwd" class=" text-white">Forgot password...?</a><br>
+	<a href="/account/signup" class=" text-white">No account? Sign up here!</a><br>
+	<button type="submit" class="btn btn-success font-weight-bolder btn-block my-2">Login</button>
 </form>
 </div>
 </div>
