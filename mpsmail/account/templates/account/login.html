@@ -1,23 +1,14 @@
 {%extends 'mail/basic.html'%}
 {%block title%}Log in to @mps.edu | @mps.edu {%endblock%}
-{%block css%}
-.font-awesome-login{
-    font-size:80px;
-}
-{%endblock%}
 {%block body%}
-<div class="container">
-<div class="row">
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl col-sm-12">
-
-	</div>
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl col-sm-12">
+<div class="container-fluid">
+<div class="col-lg-5 mx-auto">
 	<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Login</h4>
 	<form action="/account/login/" method="post" class=" list-group-item" autocomplete="off">{%csrf_token%}
 	  {%for field in form%}
 	<div class="form-group">
 	<b>{{field.label_tag}}</b>{{field}}{{field.errors}}
-</div>
+    </div>
 	{%endfor%}
 	{%for msg in messages%}
 	<p class="alert alert-danger text-danger">{{msg}}</p>
@@ -26,7 +17,6 @@
 	<a href="/account/signup">No account? Sign up here!</a><br>
 	<button type="submit" class="btn btn-success font-weight-bolder btn-block my-2">Submit</button>
 </form>
-</div>
 </div>
 </div>
 {%endblock%}

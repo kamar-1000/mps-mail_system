@@ -1,5 +1,8 @@
 {%extends 'mail/basic.html'%}
 {%block title%}{{user.username|title}} | Profile{%endblock%}
+{%block css%}
+
+{%endblock%}
 {%block body%}
 <div class="container">
     {%for msg in messages%}
@@ -8,16 +11,16 @@
 <div class="row">
 {%include "account/profile_basic.html"%}
 	<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 col-12">
-		<h6 class="list-group-item bg-danger text-white font-weight-bolder">Information<span class="float-right" id="pic_upload"><a href="/account/edit_profile" class="text-white">|edit|</a></span></h6>
+		<h6 class="list-group-item bg-danger text-white font-weight-bolder"> Account <span class="float-right" id="pic_upload"><a href="/account/edit_profile" class="text-white">|edit|</a></span></h6>
 	<div class="list-group-item ">
 		<div class="ml-3">
-		<p><b>First Name:</b> -------------------------------------------------------------------------------  {{profile.user.first_name|title}}</p>
-		<p><b>Last Name:</b> -------------------------------------------------------------------------------  {{profile.user.last_name|title}}</p>
-		<p><b>Username:</b> -------------------------------------------------------------------------------  {{profile.user.username}}</p>
-		<p><b>Phone no.:</b> -------------------------------------------------------------------------------  {{profile.tel}}</p>
-		<p><b>Email Address:</b> ---------------------------------------------------------------------------  {{profile.user.email}}</p>
-		<p><b>Sex:</b>  ---------------------------------------------------------------------------------------  {{profile.gender}}</p>
-		<p><b>Account type:</b> ----------------------------------------------------------------------------  {{profile.type}}</p>
+		<hr><p class=""><b>First Name:</b> ------------------------------------------------------------------------------ <span class="">{{profile.user.first_name|title}}</span></p><hr>
+		<p><b>Last Name:</b> ------------------------------------------------------------------------------ <span class="">{{profile.user.last_name|title}}</span></p><hr>
+		<p><b>Username:</b> ------------------------------------------------------------------------------- <span class="">{{profile.user.username}}</span></p><hr>
+		<p><b>Phone no.:</b> ------------------------------------------------------------------------------- <span class="">{{profile.tel}}</span></p><hr>
+		<p><b>Contact info:</b>---------------------------------------------------------------------------- <span class="">{{profile.user.email}}</span></p><hr>
+		<p><b>Gender:</b> ---------------------------------------------------------------------------------- <span class="">{{profile.gender}}</span></p><hr>
+		<p><b>Account type:</b> -------------------------------------------------------------------------- <span class="">{{profile.type}}</span></p><hr>
 	</div>
 	</div>
 		</div>

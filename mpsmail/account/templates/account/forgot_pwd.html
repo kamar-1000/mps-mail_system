@@ -2,12 +2,8 @@
 {%block title%}@mps.edu | Forgot Password..!{%endblock%}
 
 {%block body%}
-<div class="container">
-<div class="row">
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl col-sm-12">
-
-	</div>
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl col-sm-12">
+<div class="container-fluid">
+<div class="col-lg-5 mx-auto">
 	<h4 class="list-group-item p-2 pl-3 bg-danger text-white">Forgot Password..!</h4>
 	<form action="/account/forgot_pwd/" method="post" class=" list-group-item" autocomplete="off">{%csrf_token%}
 	<div class="form-group">
@@ -35,7 +31,6 @@
 	{%endfor%}
 	<button type="submit" class="btn btn-success">Submit</button>
 </form>
-</div>
 </div>
 </div>
 {%endblock%}

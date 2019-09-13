@@ -17,7 +17,7 @@ def profile(req):
 
 def forgot_pwd(req):
 	if req.method=="POST":
-		email=req.POST['email']
+		email=req.POST['email'].lower()
 		security=req.POST['security']
 		try:
 			profile=Profile.objects.get(user__email=email,security=security)
@@ -30,8 +30,7 @@ def forgot_pwd(req):
 				print("pwd change")
 				messages.success(req,mark_safe("password successfully Reset <a href='/account/login'>click here to login</a>"))
 				from_user=Profile.objects.get(user__username="support")
-				profile=Profile.objects.get(user__username=req.user)
-				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Password has been changed",msg="Hello <{}> Your Password Successfully Changed. For any help mail us on support@mps.edu".format(req.user))
+				inbox=Inbox.objects.create(profile=profile,from_user=from_user,sub="Your Password has been changed",msg="Hello <{}> Your Password Successfully Changed. For any help mail us on support@mps.edu".format(profile.user.username))
 				Notification.objects.create(profile=profile,mail_id=inbox.id,from_user=from_user)
 			else:messages.error(req,"Confirm password not match...!")
 		except Exception as e:
@@ -116,7 +115,7 @@ def login(req):
 	if req.method=='POST':
 		form=forms.LoginForm(req.POST)
 		if form.is_valid():
-			user=auth.authenticate(username=form.cleaned_data['email'],password=form.cleaned_data['password'])
+			user=auth.authenticate(username=form.cleaned_data['email'].lower(),password=form.cleaned_data['password'])
 			if user is not None:
 				auth.login(req,user)
 				return redirect('/home')
@@ -151,7 +150,7 @@ def signup(req):
 		return redirect("/")
 	form=forms.SignupForm()
 	if req.method=='POST':
-		name=req.POST['name']
+		name=req.POST['name'].lower()
 		fname=req.POST['fname']
 		lname=req.POST['lname']
 		pwd=req.POST['pwd']

@@ -20,17 +20,16 @@
 {%endblock%}
 {%block body%}
 <div class="container-fluid">
-<section class="my-5">
-	<div class="list-group-item">
-	   {%for msg in messages%}
+<section class="mt-5">
+    	   {%for msg in messages%}
 		{%if "success" in msg.tags%}
 		<p class="alert alert-success font-weight-bolder text-success" style="font-size:14px;">{{msg}}</p>
 		{%else%}
 		<p class="alert alert-danger font-weight-bolder text-danger" style="font-size:14px;">{{msg}}</p>
 		{%endif%}
 		{%endfor%}
-	<hr>
-	<h4 class="d-inline">{{inbox_view.sub}}...</h4><span class="float-right ">
+	<div class="list-group-item">
+	<hr><h4 class="d-inline">{{inbox_view.sub}}...</h4><span class="float-right ">
 	    {%if inbox_view.starred%}
 	<a href="#" id="delete_starred" class="text-warning"><i class="fa fa-star font-awesome-size font-awesome-delete"></i></a>
 	{%else%}
@@ -44,11 +43,15 @@
 		<p>From: {{inbox_view.from_user.user.email}}</p>
 		<p>To: {{inbox_view.profile.user.email}}</p>
 		<p>Date: {{inbox_view.date}}</p><br>
+		{%if inbox_view.attach%}
 		<div class="ml-5"><i class="fa fa-file mr-5 text-secondary inbox-view-attach-file"></i><br></div>
 		<a href="/media/{{inbox_view.attach}}" style="font-size:14px;">{{inbox_view.attach.name|slice:"12:"}}</a><br><br>
+		{%endif%}
 		<p class="msg">{{inbox_view.msg}}</p><br><br><br>
-		<button class="btn btn-outline-secondary btn-lg ml-5 font-weight-bolder px-3"><i class="fa fa-reply"></i> Reply</button>
-		<button class="btn btn-outline-secondary btn-lg ml-3 font-weight-bolder px-3"><i class="fa fa-share"></i> Forward</button><br><br><br><br>
+		<div class="row mb-5">
+		    <button class="btn btn-outline-secondary font-weight-bolder ml-4 btn-lg"><i class="fa fa-reply"></i> Reply</button>
+		<button class="btn btn-outline-secondary  font-weight-bolder ml-3 btn-lg"><i class="fa fa-share"></i> Forward</button>
+      </div><br>
 	</div>
 </section>
 </div>

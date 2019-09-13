@@ -33,8 +33,10 @@
 		<a href="/media/{{sentmail_view.attach}}" style="font-size:14px;">{{sentmail_view.attach.name|slice:"12:"}}</a><br><br>
 		{%endif%}
 		<p class="msg">{{sentmail_view.msg}}</p><br><br><br>
-		<button class="btn btn-outline-secondary btn-lg ml-5 font-weight-bolder px-3"><i class="fa fa-reply"></i> Reply</button>
-		<button class="btn btn-outline-secondary btn-lg ml-3 font-weight-bolder px-3"><i class="fa fa-share"></i> Forward</button><br><br><br><br>
+		<div class="row mb-5">
+		    <button class="btn btn-outline-secondary font-weight-bolder ml-4 btn-lg"><i class="fa fa-reply"></i> Reply</button>
+		<button class="btn btn-outline-secondary  font-weight-bolder ml-3 btn-lg"><i class="fa fa-share"></i> Forward</button>
+      </div><br>
 	</div>
 </section>
 </div>
