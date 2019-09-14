@@ -6,6 +6,10 @@
     background-image:url({%static 'mail/img/1.jpg'%});
     background-size:cover;
 }
+.text-custom{
+    color:#3f2ce8;
+    font-weight:bolder;
+}
 {%endblock%}
 {%block body%}
 <div class="container-fluid">
@@ -20,8 +24,8 @@
 	{%for msg in messages%}
 	<p class="alert alert-danger text-danger">{{msg}}</p>
 	{%endfor%}
-	<a href="/account/forgot_pwd" class=" text-white">Forgot password...?</a><br>
-	<a href="/account/signup" class=" text-white">No account? Sign up here!</a><br>
+	<a href="/account/forgot_pwd" class=" text-custom">Forgot password...?</a><br>
+	<a href="/account/signup" class=" text-custom">No account? Sign up here!</a><br>
 	<button type="submit" class="btn btn-success font-weight-bolder btn-block my-2">Login</button>
 </form>
 </div>

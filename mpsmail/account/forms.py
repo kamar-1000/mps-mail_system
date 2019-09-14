@@ -14,8 +14,8 @@ class SignupForm(forms.ModelForm):
 		model=Profile
 		exclude=['user','email','pic']
 		widgets={
-				'tel':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter you phone number",'autocomplete':"off"}),
-				'security':forms.TextInput(attrs={'class':"form-control",'placeholder':"Enter your security question this helps to reset your password",'type':"password",'autocomplete':"off"})
+				'tel':forms.TextInput(attrs={'class':"form-control",'placeholder':"enter your phone no..",'autocomplete':"off"}),
+				'security':forms.TextInput(attrs={'class':"form-control",'placeholder':"this helps to reset your password",'type':"password",'autocomplete':"off"})
 		}
 		labels = {
         "tel": "Phone no.",
