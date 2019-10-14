@@ -118,7 +118,7 @@ def login(req):
 			user=auth.authenticate(username=form.cleaned_data['email'].lower(),password=form.cleaned_data['password'])
 			if user is not None:
 				auth.login(req,user)
-				return redirect('/home')
+				return redirect('/home/inbox')
 			else:messages.error(req,"Incorrect email ID or password")
 	return render(req,'account/login.html',{'form':form})
 

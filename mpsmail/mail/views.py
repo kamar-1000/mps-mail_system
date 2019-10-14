@@ -10,7 +10,7 @@ from django.core import serializers
 # Create your views here.
 def home(req):
     if req.user.is_authenticated:
-        return render(req,"mail/index.html")
+        return redirect("/home/inbox")
     return render(req,"mail/home.html")
 def about(req):
     return render(req,"mail/about.html")
